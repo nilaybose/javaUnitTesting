@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
 /**
  * Utility class to help in unit testing by accessing member and method at object and class level.
  *
- * @author worldpay
  */
 public class JUnitReflectionUtil {
   /**

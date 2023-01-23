@@ -1,4 +1,4 @@
-package bose.edu.junit.day1;
+package bose.edu.junit.valueobjects;
 
 import com.google.common.collect.Lists;
 

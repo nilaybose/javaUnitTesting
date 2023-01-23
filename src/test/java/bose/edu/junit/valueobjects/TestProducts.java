@@ -1,4 +1,4 @@
-package bose.edu.junit.day1;
+package bose.edu.junit.valueobjects;
 
 import bose.edu.junit.util.PojoTester;
 import org.junit.jupiter.api.DisplayName;

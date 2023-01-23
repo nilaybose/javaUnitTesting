@@ -1,11 +1,15 @@
-package bose.edu.junit.day1;
+package bose.edu.junit.valueobjects;
 
 import com.google.gson.Gson;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.spi.json.JsonProvider;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -15,21 +19,19 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 @DisplayName("Unit test for TestController")
-public class TestController2 {
-
-    private Controller objUnderTest;
-    private Logger logger;
-    private Service service;
+public class TestController {
     private Gson gson = new Gson();
-    JsonProvider jsonProvider = Configuration.defaultConfiguration().jsonProvider();
+    private JsonProvider jsonProvider = Configuration.defaultConfiguration().jsonProvider();
 
-    @BeforeEach
-    public void init() {
-        logger = mock(Logger.class);
-        service = spy(Service.class);
-        objUnderTest = new Controller(service, logger);
-    }
+    @Mock
+    private Logger logger ;
+    @Spy
+    private Service service ;
+
+    @InjectMocks
+    private Controller objUnderTest;
 
     @Test
     @DisplayName("Unit test for test all products with region 1")
@@ -81,8 +83,8 @@ public class TestController2 {
     @Test
     @DisplayName("Unit test for test all products with exception")
     public void testGetAllProductsException() {
-        RuntimeException ex = new RuntimeException("AWS down");
-        doThrow(ex).when(service).getAllProducts("3");
+        RuntimeException ex = new RuntimeException("AWS down") ;
+        doThrow(ex).when(service).getAllProducts("3") ;
 
         String response = objUnderTest.getAllProducts("3");
         System.out.println(response);
